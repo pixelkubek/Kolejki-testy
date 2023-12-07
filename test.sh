@@ -1,6 +1,9 @@
 #!/bin/bash
 
 g++ @opcjeCpp main.cpp kol.cpp -o main.e
+if [ $? != 0 ]; then
+    exit -1
+fi
 
 licznik=1
 

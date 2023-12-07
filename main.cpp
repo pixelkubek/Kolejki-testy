@@ -12,7 +12,7 @@ typedef std::vector< std::vector<interesant*> > listaUrzedu;
 
 std::map<interesant*, int> numerki;
 
-// void wyswietlUrzad();
+void wyswietlUrzad();
 
 void symNowyInteresant(int kolejka, listaUrzedu &v){
     static int nr = 0;
@@ -25,20 +25,18 @@ void symObsluz(int kolejka, listaUrzedu &v){
     interesant *obsluzony = obsluz(kolejka);
 
     if(v[kolejka].empty()) assert(obsluzony == NULL);
-    else assert(obsluzony == v[kolejka].front());
-
-    if(obsluzony){
+    else{
+        assert(obsluzony == v[kolejka].front());
         assert(numerek(obsluzony) == numerki[obsluzony]);
         numerki.erase(obsluzony);
+        
+        std::vector<interesant*> nVector;
+        for(size_t i = 1; i < v[kolejka].size(); i++)
+            nVector.push_back(v[kolejka][i]);
+        v[kolejka] = nVector;
+
+        free(obsluzony);
     }
-
-    std::vector<interesant*> nVector;
-    for(size_t i = 1; i < v[kolejka].size(); i++)
-        nVector.push_back(v[kolejka][i]);
-    v[kolejka] = nVector;
-
-    // v[kolejka].erase(v[kolejka].begin());
-    free(obsluzony);
 }
 
 void symZamianaOkienka(int kolejka, int idxInteresanta, int nowaKolejka, listaUrzedu &v){
@@ -63,7 +61,7 @@ void symFastTrack(int kolejka, int pierwszy, int drugi, listaUrzedu &v){
         numerki.erase(obsluzeni[i - pierwszy]);
         free(obsluzeni[i - pierwszy]);
     }
-    // std::vector<interesant*>::iterator poczatek = std::next(v[kolejka].begin(), pierwszy);
+
     std::vector<interesant*> nVector;
     for(int i = 0; i < (int)v[kolejka].size(); i++){
         if(i < pierwszy || i > drugi)
@@ -71,8 +69,6 @@ void symFastTrack(int kolejka, int pierwszy, int drugi, listaUrzedu &v){
     }
 
     v[kolejka] = nVector;
-    // v[kolejka].erase(poczatek, std::next(poczatek, (pierwszy - drugi) + 1));
-    // v[kolejka].resize(v[kolejka].size() - (pierwszy - drugi + 1));
 }
 
 void symNaczelnik(int kolejka, listaUrzedu &v){
@@ -88,7 +84,8 @@ void symZamkniecieUrzedu(listaUrzedu &v){
     for(std::vector<interesant*> kolejka : v){
         for(interesant* its : kolejka){
             assert(obsluzeni[licznik] == its);
-            assert(numerek(obsluzeni[licznik++]) == numerki[its]);
+            assert(numerek(obsluzeni[licznik]) == numerki[its]);
+            free(obsluzeni[licznik++]);
         }
     }
 }
@@ -111,45 +108,29 @@ int main(){
         switch(ch){
         case 'N':
             std::cin >> a;
-            // std::cout << ch << " " << a << " \n";
             symNowyInteresant(a, v);
             break;
         case 'O':
             std::cin >> a;
-            // std::cout << ch << " " << a << " \n";
             symObsluz(a, v);
             break;
         case 'Z':
             std::cin >> a >> b >> c;
-            // std::cout << ch << " " << a << " " << b << " " << c << " \n";
             symZamianaOkienka(a, b, c, v);
             break;
         case 'C':
             std::cin >> a >> b;
-            // std::cout << ch << " " << a << " " << b << " \n";
             symZamkniecieOkienka(a, b, v);
             break;
         case 'F':
             std::cin >> a >> b >> c;
-            // std::cout << ch << " " << a << " " << b << " " << c << " \n";
             symFastTrack(a, b, c, v);
             break;
         case 'R':
             std::cin >> a;
-            // std::cout << ch << " " << a << " \n";
             symNaczelnik(a, v);
             break;
         }
-
-        // for(auto k : v){
-        //     for(interesant* it : k){
-        //         std::cout << numerek(it) << " ";
-        //     }
-        //     std::cout << std:: endl;
-        // }
-        // wyswietlUrzad();
-
-        // std::cout << std::endl << std::endl;
     }
 
     symZamkniecieUrzedu(v);

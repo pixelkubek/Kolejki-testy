@@ -17,5 +17,5 @@ O 0 //obsłuż 0 kolejkę
 Z 0 5 1 //zamień okienko 5 interesanta w 0 kolejce na 1 kolejkę
 C 0 3 //zamknij kolejkę 0, nowa kolejka 3
 F 1 3 5 //fast-track od 3 interesanta w 1 kolejce do 5 interesanta włącznie
-R 1 //naczelnik na kolejce 0
+R 1 //naczelnik na kolejce 1
 ```

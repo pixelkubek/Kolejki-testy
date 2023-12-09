@@ -12,8 +12,6 @@ typedef std::vector< std::vector<interesant*> > listaUrzedu;
 
 std::map<interesant*, int> numerki;
 
-void wyswietlUrzad();
-
 void symNowyInteresant(int kolejka, listaUrzedu &v){
     static int nr = 0;
     interesant *nowyInteresant = nowy_interesant(kolejka);

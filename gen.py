@@ -3,8 +3,8 @@ from sys import argv
 
 seed(int(argv[1]))
 
-M = randint(2, 20)
-N = randint(10, 100)
+M = randint(2, 20)      #ilosc kolejek
+N = randint(10, 100)    #ilosc wydarzen
 
 
 f = open("dane.in", "w")
@@ -60,6 +60,7 @@ def naczelnik():
     print(f'R {randint(0, M - 1)}', file=f)
     return True
 
+#szanse na wydarzenia
 wagi = {
     nowyInteresant : 10,
     obsluz : 7,

@@ -1,13 +1,13 @@
 # WDP_Kolejki_Testy
 
-Należy umieścić pliki kol.cpp i kol.h w folderze.
+Należy umieścić pliki kol.cpp i kol.h w folderze. Testy są generowane automatycznie, więc nie gwarantuję, że wyłapią wszystkie błędy.
 
 ### Komenda do uruchomienia
 ```bash
 bash ./test.sh
 ```
 
-Można też przekazać pliki .in na stdin
+Można też przekazać pliki .in na stdin.
 
 ### Struktura pliku .in
 ```
@@ -19,3 +19,10 @@ C 0 3 //zamknij kolejkę 0, nowa kolejka 3
 F 1 3 5 //fast-track od 3 interesanta w 1 kolejce do 5 interesanta włącznie
 R 1 //naczelnik na kolejce 1
 ```
+### Parametry pliku in
+Parametry takie jak 
+- możliwa ilość kolejek
+- możliwa ilość testów
+- szansa danego wydarzenia
+  
+można ustawić w pliku [gen.py](./gen.py).

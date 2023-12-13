@@ -4,8 +4,10 @@ Należy umieścić pliki kol.cpp i kol.h w folderze. Testy są generowane automa
 
 ### Komenda do uruchomienia
 ```bash
-bash ./test.sh
+bash ./test.sh -v <true/false>
 ```
+
+-v - czy użyć valgrinda
 
 Można też przekazać pliki .in na stdin.
 
